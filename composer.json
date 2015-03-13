@@ -1,0 +1,8 @@
+{
+    "require": {
+        "slim/slim": "~2.6",
+		"php-instagram-api/php-instagram-api": "dev-master",
+		"doctrine/cache": "1.5.*@dev",
+        "vlucas/phpdotenv": "~1.1"
+    }
+}
