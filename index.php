@@ -50,13 +50,14 @@ $app->get('/tag/:tag(/:page)', function ($tag, $page = null) use ($app, $instagr
 
 	    $storage = [
 	    	'images' => $data[0],
-	    	'next' => 'http://' . $_SERVER['HTTP_HOST'] . '/tag/' . $tag . '/' . $data[1]->getNext(),
+	    	'previous' => 'http://' . $_SERVER['HTTP_HOST'] . '/tag/' . $tag . '/' . $data[1]->getNext(),
+	    	'permalink' => 'http://' . $_SERVER['HTTP_HOST'] . '/tag/' . $tag . '/' . $data[1]->getMinTagId(),
 	    	'expiration' => strtotime('+5 seconds')
 	    ];
 	    $cache->save($term, $storage);
 	}
-
-	echo json_encode($storage);
+	$app->response->headers->set('Content-Type', 'application/json');
+	$app->response->setBody(json_encode($storage));
 
 });
 
