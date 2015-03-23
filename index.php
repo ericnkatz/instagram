@@ -27,7 +27,7 @@ $app->get('/tag/:tag(/:page)', function ($tag, $page = null) use ($app, $instagr
 	// $app->expires('+5 seconds');
 
     $storage = $cache->fetch($term);
-    if($storage['expiration'] < $now) {
+    if($storage['data']['expiration'] < $now) {
 
 	    $data = function() use($instagram, $tag, $params) {
 	    	$tag = $instagram->getTag($tag)->getMedia( $params );
@@ -39,6 +39,7 @@ $app->get('/tag/:tag(/:page)', function ($tag, $page = null) use ($app, $instagr
 					'image' => $image->images->standard_resolution->url,
 					'author' => [
 						'username' => $image->user->username,
+						'avatar' => $image->user->profile_picture,
 						'full_name' => $image->user->full_name
 					]
 				];
@@ -49,10 +50,13 @@ $app->get('/tag/:tag(/:page)', function ($tag, $page = null) use ($app, $instagr
 	    $data = $data();
 
 	    $storage = [
-	    	'images' => $data[0],
-	    	'previous' => 'http://' . $_SERVER['HTTP_HOST'] . '/tag/' . $tag . '/' . $data[1]->getNext(),
-	    	'permalink' => 'http://' . $_SERVER['HTTP_HOST'] . '/tag/' . $tag . '/' . $data[1]->getMinTagId(),
-	    	'expiration' => strtotime('+5 seconds')
+	    	'data' => [
+		    	'previous' => 'http://' . $_SERVER['HTTP_HOST'] . '/tag/' . $tag . '/' . $data[1]->getNext(),
+		    	// 'next' => 'http://' . $_SERVER['HTTP_HOST'] . '/tag/' . $tag . '/' . $data[],
+		    	'permalink' => 'http://' . $_SERVER['HTTP_HOST'] . '/tag/' . $tag . '/' . $data[1]->getMinTagId(),
+		    	'expiration' => strtotime('+5 seconds'),
+		    	'images' => $data[0],
+	    	]
 	    ];
 	    $cache->save($term, $storage);
 	}
