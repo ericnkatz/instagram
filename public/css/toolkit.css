@@ -1,0 +1,262 @@
+@font-face {
+  font-family: 'bebas';
+  src: url('../fonts/bebas/BebasNeue.otf');
+  font-weight: normal;
+  font-style: normal; }
+
+/**
+ * Base Styles
+ */
+* {
+  box-sizing: border-box; }
+
+body {
+  background: #000;
+  color: #FFF;
+  font-family: 'bebas', sans-serif;
+  margin: 0;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+  position: relative; }
+
+.full {
+  width: 100%; }
+
+img.full {
+  display: block;
+  height: auto; }
+
+span.intrinsic, span.intrinsic__wrapper, img.intrinsic__wrapper__element, span.intrinsic__wrapper__element {
+  display: block; }
+
+.intrinsic__wrapper {
+  position: relative;
+  height: 0; }
+
+.intrinsic__wrapper.-ratio-1x1 {
+  padding-bottom: 100%; }
+
+.intrinsic__wrapper__element {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%; }
+
+/**
+ * Instagram Styles
+ */
+.container {
+  margin-left: auto;
+  margin-right: auto; }
+  .container.-centered {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+        -ms-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+    width: auto; }
+
+.user__avatar, .user__name {
+  display: inline-block; }
+
+.user {
+  white-space: nowrap;
+  position: relative; }
+  @media (orientation: portrait) {
+    .user {
+      height: 28.98vw;
+      margin-left: -18vw;
+      margin-top: -7.5vw; } }
+  @media (orientation: landscape) {
+    .user {
+      height: 28.98vh;
+      margin-left: -18vh;
+      margin-top: -7.5vh; } }
+  .user:first-child .user__name {
+    opacity: 1; }
+  .user:first-child, .user:nth-child(2), .user:nth-child(3), .user:nth-child(4), .user:nth-child(5) {
+    -webkit-transform: translateY(0);
+        -ms-transform: translateY(0);
+            transform: translateY(0); }
+
+.user__avatar {
+  background-color: #FFF;
+  border-radius: 100%;
+  vertical-align: middle;
+  overflow: hidden; }
+  @media (orientation: portrait) {
+    .user__avatar {
+      border: 0.375vw solid #FFF;
+      margin-top: -0.1875vw;
+      margin-right: 3vw;
+      height: 15vw;
+      width: 15vw; } }
+  @media (orientation: landscape) {
+    .user__avatar {
+      border: 0.375vh solid #FFF;
+      margin-top: -0.1875vh;
+      margin-right: 3vh;
+      height: 15vh;
+      width: 15vh; } }
+
+.user__name {
+  -webkit-transition-duration: 1500ms;
+          transition-duration: 1500ms;
+  -webkit-transition-timing-function: ease-out;
+          transition-timing-function: ease-out;
+  -webkit-transition-delay: 0;
+          transition-delay: 0;
+  -webkit-transition-property: opacity;
+          transition-property: opacity;
+  vertical-align: top;
+  -webkit-transform: translateY(-50%);
+      -ms-transform: translateY(-50%);
+          transform: translateY(-50%);
+  opacity: 0; }
+  @media (orientation: portrait) {
+    .user__name {
+      font-size: 4.54545vw;
+      line-height: 0.53571ex; } }
+  @media (orientation: landscape) {
+    .user__name {
+      font-size: 4.54545vh;
+      line-height: 0.53571ex; } }
+
+.instagram__users {
+  position: absolute;
+  top: 0;
+  z-index: 0; }
+
+.instagram__users__user {
+  display: none; }
+  .instagram__users__user:nth-child(5) {
+    opacity: 0 !important; }
+  .instagram__users__user:first-child, .instagram__users__user:nth-child(2), .instagram__users__user:nth-child(3), .instagram__users__user:nth-child(4), .instagram__users__user:nth-child(5) {
+    display: block; }
+  .instagram__users__user + .instagram__users__user {
+    opacity: .5; }
+
+.instagram__image {
+  z-index: 2; }
+  @media (orientation: portrait) {
+    .instagram__image {
+      height: 75vw;
+      width: 75vw; } }
+  @media (orientation: landscape) {
+    .instagram__image {
+      height: 75vh;
+      width: 75vh; } }
+
+/**
+ * JS Animations/Functions
+ */
+.instagram__image {
+  position: relative; }
+  .instagram__image > .intrinsic {
+    -webkit-transition-duration: 2000ms;
+            transition-duration: 2000ms;
+    -webkit-transition-timing-function: ease-out;
+            transition-timing-function: ease-out;
+    -webkit-transition-delay: 0;
+            transition-delay: 0;
+    -webkit-transition-property: opacity;
+            transition-property: opacity;
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: none; }
+    .instagram__image > .intrinsic + .intrinsic {
+      z-index: 0; }
+    .instagram__image > .intrinsic:first-child, .instagram__image > .intrinsic:nth-child(2) {
+      display: block;
+      opacity: 1; }
+    .instagram__image > .intrinsic:first-child {
+      z-index: 1; }
+    .instagram__image > .intrinsic.js-hide-CurrentImage {
+      opacity: 0; }
+
+@-webkit-keyframes avatarchildren {
+  0% {
+    -webkit-transform: translateY(0);
+            transform: translateY(0); }
+
+  100% {
+    -webkit-transform: translateY(-21.48vw);
+            transform: translateY(-21.48vw); } }
+
+@keyframes avatarchildren {
+  0% {
+    -webkit-transform: translateY(0);
+            transform: translateY(0); }
+
+  100% {
+    -webkit-transform: translateY(-21.48vw);
+            transform: translateY(-21.48vw); } }
+
+@-webkit-keyframes avatarchildrenV {
+  0% {
+    -webkit-transform: translateY(0);
+            transform: translateY(0); }
+
+  100% {
+    -webkit-transform: translateY(-21.48vh);
+            transform: translateY(-21.48vh); } }
+
+@keyframes avatarchildrenV {
+  0% {
+    -webkit-transform: translateY(0);
+            transform: translateY(0); }
+
+  100% {
+    -webkit-transform: translateY(-21.48vh);
+            transform: translateY(-21.48vh); } }
+
+.js-insert-avatars .user {
+  -webkit-transition-duration: 500ms;
+          transition-duration: 500ms;
+  -webkit-transition-timing-function: ease-out;
+          transition-timing-function: ease-out;
+  -webkit-transition-delay: 0;
+          transition-delay: 0;
+  -webkit-transition-property: all;
+          transition-property: all;
+  -webkit-transform: translateY(0);
+      -ms-transform: translateY(0);
+          transform: translateY(0);
+  -webkit-animation-play-state: paused;
+          animation-play-state: paused; }
+  .js-insert-avatars .user:first-child {
+    -webkit-transition-duration: 1000ms;
+            transition-duration: 1000ms;
+    -webkit-transition-timing-function: ease-out;
+            transition-timing-function: ease-out;
+    -webkit-transition-delay: 0;
+            transition-delay: 0;
+    -webkit-transition-property: all;
+            transition-property: all;
+    opacity: 1; }
+
+.js-insert-avatars.js-move-moveAvatars .user {
+  -webkit-animation-play-state: running;
+          animation-play-state: running; }
+  .js-insert-avatars.js-move-moveAvatars .user:first-child {
+    -webkit-transition-duration: 500ms;
+            transition-duration: 500ms;
+    -webkit-transition-timing-function: ease-out;
+            transition-timing-function: ease-out;
+    -webkit-transition-delay: 0;
+            transition-delay: 0;
+    -webkit-transition-property: all;
+            transition-property: all;
+    opacity: 0; }
+  @media (orientation: portrait) {
+    .js-insert-avatars.js-move-moveAvatars .user:nth-child(2), .js-insert-avatars.js-move-moveAvatars .user:nth-child(3), .js-insert-avatars.js-move-moveAvatars .user:nth-child(4), .js-insert-avatars.js-move-moveAvatars .user:nth-child(5) {
+      -webkit-animation: avatarchildren 1000ms ease-in-out 0 1;
+              animation: avatarchildren 1000ms ease-in-out 0 1; } }
+  @media (orientation: landscape) {
+    .js-insert-avatars.js-move-moveAvatars .user:nth-child(2), .js-insert-avatars.js-move-moveAvatars .user:nth-child(3), .js-insert-avatars.js-move-moveAvatars .user:nth-child(4), .js-insert-avatars.js-move-moveAvatars .user:nth-child(5) {
+      -webkit-animation: avatarchildrenV 1000ms ease-in-out 0 1;
+              animation: avatarchildrenV 1000ms ease-in-out 0 1; } }

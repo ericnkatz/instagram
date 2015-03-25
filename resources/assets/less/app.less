@@ -1,0 +1,27 @@
+@import "bootstrap/bootstrap";
+
+@btn-font-weight: 300;
+@font-family-sans-serif: "Roboto", Helvetica, Arial, sans-serif;
+
+body, label, .checkbox label {
+	font-weight: 300;
+}
+
+.image {
+	display: block;
+	float: left;
+	width: 20%;
+	margin: 2.5%;
+	transition: 300ms cubic-bezier(.17,.67,.28,.94);
+	img {
+		max-width: 100%;
+	}
+
+	&:hover {
+		background-color: #AC78F2;
+		transform: scale(1.1);
+	}
+	&.activated {
+		background-color: #F5E577;
+	}
+}

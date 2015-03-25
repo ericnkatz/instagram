@@ -1,33 +1,23 @@
-# instagram
+## Laravel PHP Framework
 
-## Installation
+[![Build Status](https://travis-ci.org/laravel/framework.svg)](https://travis-ci.org/laravel/framework)
+[![Total Downloads](https://poser.pugx.org/laravel/framework/downloads.svg)](https://packagist.org/packages/laravel/framework)
+[![Latest Stable Version](https://poser.pugx.org/laravel/framework/v/stable.svg)](https://packagist.org/packages/laravel/framework)
+[![Latest Unstable Version](https://poser.pugx.org/laravel/framework/v/unstable.svg)](https://packagist.org/packages/laravel/framework)
+[![License](https://poser.pugx.org/laravel/framework/license.svg)](https://packagist.org/packages/laravel/framework)
 
-Requires composer, to install composer globally:
-```Shell 
-curl -sS https://getcomposer.org/installer | php 
-mv composer.phar /usr/local/bin/composer
-```
+Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable, creative experience to be truly fulfilling. Laravel attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as authentication, routing, sessions, queueing, and caching.
 
-To install application run:
-```Shell 
-composer install
-```
-this will install additional project packages in a vendor folder as well as create the *autoload.php* that is included in the *index.php*
+Laravel is accessible, yet powerful, providing powerful tools needed for large, robust applications. A superb inversion of control container, expressive migration system, and tightly integrated unit testing support give you the tools you need to build any application with which you are tasked.
 
-## Running
-You'll need to create a **.env** file in the project directory, you can copy the format from **.env.example** and fill it with your correct instagram credential information.
-Then navigate to your project directory in terminal and type:
-````Shell
-php -S localhost:1234
-`````
-this will run a php webserver in your directory that you can then navigate to http://localhost:1234 to see the 404 page for this application.
-Currently the only functionality is when you hit [http://localhost:1234/tag/**cbus**](http://localhost:1234/tag/cbus) you should see it return formatted json of instagram images with the hashtag **cbus**, the application currently accepts any hashtag in the route so feel free to visit as many as you like. The app will cache any pages using doctrine's file cache driver for 5 seconds
+## Official Documentation
 
+Documentation for the framework can be found on the [Laravel website](http://laravel.com/docs).
 
-## Deployment
-To run in php 5.4 web host, after running ````composer install```` copy all files in project directory to your webhost and navigate to the directory or index.php or domain if in root of domain directory.
-Live preview of this application is visible [here](http://instagram.katz.ninja/tag/civichacks).
+## Contributing
 
-## Gotchas
-If you run into an issue warning you to set a default php timezone you can do this by editing your */etc/php.ini.default* 
-````date.timezone = America/New_York```` or by adding : ````date_default_timezone_set('America/New_York');```` to the top of your *index.php* file, related issue: https://github.com/slimphp/Slim-Skeleton/issues/14
+Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](http://laravel.com/docs/contributions).
+
+### License
+
+The Laravel framework is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT)

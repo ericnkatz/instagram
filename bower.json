@@ -1,0 +1,22 @@
+{
+  "name": "civic-slim",
+  "version": "0.0.0",
+  "homepage": "https://github.com/ericnkatz/instagram-middleware",
+  "authors": [
+    "ericnkatz <admin@ericnkatz.com>"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests",
+    "vendor/bower_components"
+  ],
+  "dependencies": {
+    "lodash": "~3.5.0",
+    "jquery": "~2.1.3"
+  }
+}
