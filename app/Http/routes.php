@@ -12,7 +12,8 @@
 */
 
 Route::get('admin/image', 'AdminController@addImage');
-Route::get('admin/tag/{tag}', 'AdminController@tag');
+Route::get('tag/{tag}/admin', 'AdminController@tag');
+Route::get('tag/{tag}/api', 'AdminController@tagApi');
 
 Route::get('tag/{tag}', 'ImagesController@tag');
 

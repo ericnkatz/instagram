@@ -18,6 +18,7 @@ var paths = {
 
 elixir(function(mix) {
     mix.less('app.less')
+    	.sass('toolkit.scss')
     	.copy(paths.lodash + '/**.js', 'public/js')
     	.copy(paths.jquery + '/dist/**.js', 'public/js');
 });

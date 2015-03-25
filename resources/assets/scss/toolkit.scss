@@ -1,0 +1,317 @@
+@mixin animation-base($duration: 300ms, $timing: ease-in-out, $delay: 0) {
+	transition-duration: $duration;
+	transition-timing-function: $timing;
+	transition-delay: $delay;
+}
+
+@mixin allChange($duration: 300ms, $timing: ease-in-out, $delay: 0, $property: all) {
+	@include animation-base($duration, $timing, $delay);
+
+	transition-property: $property;
+}
+
+$avatar-width: 15vw;
+$avatar-height: 15vh;
+$default-space: ($avatar-width / 10);
+$default-space-v: ($avatar-height / 10);
+$timer: 5000;
+
+@font-face {
+	font-family: 'bebas';
+	src:url('../fonts/bebas/BebasNeue.otf');
+	font-weight: normal;
+	font-style: normal;
+}
+
+/**
+ * Base Styles
+ */
+
+* {
+	box-sizing: border-box;
+}
+
+body {
+	background: #000;
+	color: #FFF;
+	font-family: 'bebas', sans-serif;
+	margin: 0;
+	height: 100vh;
+	width: 100vw;
+	overflow: hidden;
+	position: relative;
+}
+
+.full {
+	width: 100%;
+}
+
+img.full {
+	display: block;
+	height: auto;
+}
+
+.intrinsic {
+}
+
+span.intrinsic, span.intrinsic__wrapper, img.intrinsic__wrapper__element, span.intrinsic__wrapper__element {
+	display: block;
+}
+
+.intrinsic__wrapper {
+	position: relative;
+	height: 0;
+}
+
+.intrinsic__wrapper.-ratio-1x1 {
+	padding-bottom: 100%;
+}
+
+.intrinsic__wrapper__element {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+}
+
+
+
+/**
+ * Instagram Styles
+ */
+
+.container {
+	margin-left: auto;
+	margin-right: auto;
+	
+
+	&.-centered {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		width: auto;
+	}
+}
+
+%user-align {
+	vertical-align: middle;
+}
+
+%user-shared {
+	display: inline-block;
+}
+
+.user {
+	white-space: nowrap;
+	position: relative;
+	//height: $avatar-width + ($default-space * 4.32) + ($avatar-width / 2);
+
+	
+	@media (orientation:portrait) {
+		height: $avatar-width + ($default-space * 4.32) + ($avatar-width / 2);
+		margin-left: -$avatar-width - ($default-space * 2);
+		margin-top: -$avatar-width / 2;
+	}
+
+	@media (orientation:landscape) {
+		height: $avatar-height + ($default-space-v * 4.32) + ($avatar-height / 2);
+		margin-left: -$avatar-height - ($default-space-v * 2);
+		margin-top: -$avatar-height / 2;
+	}
+
+	&:first-child {
+		.user__name {
+			opacity: 1;
+		}
+	}
+
+	&:first-child, &:nth-child(2), &:nth-child(3), &:nth-child(4), &:nth-child(5) {
+		transform: translateY(0);
+	}
+}
+
+.user__avatar {
+	@extend %user-shared;
+	background-color: #FFF;
+	border-radius: 100%;
+	vertical-align: middle;
+	overflow: hidden;
+
+	@media (orientation:portrait) {
+		border: ($default-space / 4) solid #FFF;
+		margin-top: - ($default-space / 8);
+		margin-right: $default-space * 2;
+		height: $avatar-width;
+		width: $avatar-width;
+	}
+	
+	@media (orientation:landscape) {
+		border: ($default-space-v / 4) solid #FFF;
+		margin-top: - ($default-space-v / 8);
+		margin-right: $default-space-v * 2;
+		height: $avatar-height;
+		width: $avatar-height;
+	}
+}
+
+.user__name {
+	@include allChange($duration: #{$timer / (40/3)}ms, $timing: ease-out, $property: opacity);
+	@extend %user-shared;
+	vertical-align: top;
+	transform: translateY(-50%);
+	opacity: 0;
+
+	@media (orientation:portrait) {
+		font-size: #{($avatar-width / 3.3vw)}#{vw};
+		line-height: #{($avatar-width / 28vw)}#{ex};
+	}
+	
+	@media (orientation:landscape) {
+		font-size: #{($avatar-height / 3.3vh)}#{vh};
+		line-height: #{($avatar-height / 28vh)}#{ex};
+	}
+}
+
+.instagram {
+}
+
+.instagram__users {
+	position: absolute;
+	top: 0;
+	z-index: 0;
+}
+
+.instagram__users__user {
+	display: none;
+
+	&:nth-child(5) {
+		opacity: 0 !important;
+	}
+
+	&:first-child, &:nth-child(2), &:nth-child(3), &:nth-child(4),  &:nth-child(5),{
+		display: block;
+	}
+
+	& + .instagram__users__user  {
+		//margin-top: $default-space * 4.32;
+		opacity: .5;
+	}
+}
+
+.instagram__image {
+	z-index: 2;
+
+	@media (orientation:portrait) {
+		height: $avatar-width * 5;
+		width: $avatar-width * 5;
+	}
+
+	@media (orientation:landscape) {
+		height: $avatar-height * 5;
+		width: $avatar-height * 5;
+	}
+}
+
+
+/**
+ * JS Animations/Functions
+ */
+
+
+ .instagram__image {
+ 	position: relative;
+
+	> .intrinsic {
+		@include allChange($duration: #{$timer / 10}ms, $timing: ease-out, $property: opacity);
+
+		position: absolute;
+		top: 0;
+		left: 0;
+		display: none;
+
+		& + .intrinsic {
+			z-index: 0;
+		}
+
+		&:first-child, &:nth-child(2) {
+			display: block;
+			opacity: 1;
+		}
+
+		&:first-child {
+			z-index: 1;
+		}
+
+		&.js-hide-CurrentImage {
+			opacity: 0;
+		}
+	}
+ }
+
+
+
+@keyframes avatarchildren {
+	0% {
+		transform: translateY(0);
+	}
+	100% {
+		transform: translateY( #{($avatar-width + ($default-space * 4.32)) * -1} );
+	}
+}
+
+@keyframes avatarchildrenV {
+	0% {
+		transform: translateY(0);
+	}
+	100% {
+		transform: translateY( #{($avatar-height + ($default-space-v * 4.32)) * -1} );
+	}
+}
+
+
+.js-insert-avatars {
+	.user {
+		@include allChange($duration: #{$timer / 40}ms, $timing: ease-out);
+		transform: translateY(0);
+		animation-play-state: paused;
+
+		&:first-child {
+			@include allChange($duration: #{$timer / 20}ms, $timing: ease-out);
+			opacity: 1;
+		}
+	}
+}
+
+
+
+.js-insert-avatars {
+	&.js-move-moveAvatars {
+		.user {
+			animation-play-state: running;
+
+			&:first-child {
+				@include allChange($duration: #{$timer / 40}ms, $timing: ease-out);
+				opacity: 0;
+			}
+
+			&:nth-child(2), &:nth-child(3), &:nth-child(4), &:nth-child(5) {
+
+				@media (orientation:portrait) {
+					animation: avatarchildren #{$timer / 20}ms ease-in-out 0 1;
+				}
+				
+				@media (orientation:landscape) {
+					animation: avatarchildrenV #{$timer / 20}ms ease-in-out 0 1;
+				}
+			}
+		}
+		//animation: avatarContainer 100ms ease-out 1#{$timer / 40}ms;
+	}
+}
+
+
+//js-insert-avatars js-move-moveAvatars
+
+

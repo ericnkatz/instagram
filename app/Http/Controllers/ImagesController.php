@@ -22,7 +22,8 @@ class ImagesController extends Controller {
 	 */
 	public function tag($tag)
 	{
-		$images = Image::all();
+		$images = Image::where('tag', $tag)->get();
+
 		
 		return view( 'tag', ['images' => $images, 'tag' => $tag] );
 	}

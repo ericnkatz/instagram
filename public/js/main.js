@@ -31,7 +31,7 @@ var w = window,
 ch.baseURL = baseURL; // from `outro.html`
 
 ch.timing = {
-    showImage: 20000
+    showImage: 5000
 };
 
 ch.sponsors = {
@@ -83,7 +83,7 @@ ch.display = {
     addAvatars: function(amountToDisplay) {
         for (var index in ch.data.currentSet) {
             var tempDOM = this.avatarDOM;
-                tempDOM = tempDOM.replace(/{{image}}/g, ch.data.currentSet[index].image)
+                tempDOM = tempDOM.replace(/{{image}}/g, ch.data.currentSet[index].author.avatar)
                                  .replace(/{{author-full_name}}/g, ("@" + ch.data.currentSet[index].author.username.trim()));
 
             this.avatarContainer.append(tempDOM);
@@ -134,8 +134,10 @@ ch.timers = {
         }
 
         if ( ch.display.avatarsToShow >= (ch.data.currentLength - ch.data.imageCount) ) {
+
             ch.data.get();
             ch.data.imageCount = 0;
+            
         }
     },
     changeCurrentImage: function() {
@@ -178,18 +180,13 @@ ch.data = {
     imageCount: 0,
     get: function(amount, lastId) {
         $.ajax({
-            url: ch.baseURL +
-                 ((amount) ? "?amount=1" + amount : "?x=1") +
-                 ((lastId) ? "&lastId=" + lastId : ""),
+            url: ch.baseURL,
             dataType: "json",
             success: function (data) {
-                if (ch.data.isFirstTime) {
-                    ch.data.fullSet = data.images;
-                    ch.data.currentLength = data.images.length;
-                    ch.data.currentSet = data.images;
-                } else {
-                }
+                console.log(data);
 
+                ch.data.fullSet = data.images;
+                ch.data.currentLength = data.images.length;
                 ch.data.currentSet = data.images;
 
                 ch.data.split();
@@ -220,5 +217,6 @@ ch.data = {
 
 
 $(function() {
-  ch.data.init(true);
+    ch.data.init(true);
 });
+

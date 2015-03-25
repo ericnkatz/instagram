@@ -47,6 +47,28 @@ class AdminController extends Controller {
 		return view('admin.tag', ['data' => $data]);
 	}
 
+	public function tagApi(Request $request,  $tag)
+	{
+		$images = Image::where('tag', $tag)->get()->reverse();
+
+		$buildImages = [];
+		
+		foreach($images as $image) {
+			$buildImages[] = [
+				'id' => $image['id'],
+				'link' => $image['link'],
+				'image' => $image['image'],
+				'author' => [
+					'username' => $image['username'],
+					'avatar' => $image['avatar'],
+					'full_name' => $image['full_name']
+				]
+			];
+		}
+
+		return ['images' => $buildImages];
+	}
+
 	public function addImage(Request $request)
 	{
 		$input = $request->all();
